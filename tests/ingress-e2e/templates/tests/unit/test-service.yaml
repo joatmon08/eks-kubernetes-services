@@ -1,0 +1,22 @@
+suite: test service
+templates:
+  - service.yaml
+tests:
+  - it: should work
+    asserts:
+      - isKind:
+          of: Service
+  - it: should have port and type
+    asserts:
+      - equal:
+          path: spec.type
+          value: NodePort
+      - equal:
+          path: spec.ports[0].port
+          value: 80
+      - equal:
+          path: spec.ports[0].targetPort
+          value: http
+      - equal:
+          path: spec.ports[0].name
+          value: http

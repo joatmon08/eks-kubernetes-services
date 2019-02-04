@@ -1,0 +1,22 @@
+## Ignore rendered templates
+external-dns/*.yml
+ingress-nginx/*.yml
+admin-role/role.yml
+
+## Ignore Terraform metadata
+.terraform
+*tfstate*
+backend.conf
+
+## Don't commit any keys!
+*.env
+*-key.json
+ssl_cert/
+*.crt
+*.key
+
+configs/*.json
+
+*cache*/
+
+tests/ingress-e2e/values.*.yaml

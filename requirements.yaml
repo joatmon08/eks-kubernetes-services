@@ -1,0 +1,7 @@
+dependencies:
+  - name: kube2iam
+    version: 0.10.0
+    repository: http://storage.googleapis.com/kubernetes-charts
+  - name: aws-alb-ingress-controller
+    version: 0.1.4
+    repository: http://storage.googleapis.com/kubernetes-charts-incubator

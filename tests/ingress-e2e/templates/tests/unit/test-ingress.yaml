@@ -1,0 +1,27 @@
+suite: test ingress
+templates:
+  - ingress.yaml
+tests:
+  - it: should set annotations when given
+    asserts:
+      - isKind:
+          of: Ingress
+      - equal:
+          path: metadata.annotations
+          value:
+            kubernetes.io/ingress.class: alb
+            alb.ingress.kubernetes.io/scheme: internet-facing
+  - it: should configure rules
+    asserts:
+      - equal:
+          path: spec.rules[0].host
+          value: ingress-e2e.joatmon08.com
+      - equal:
+          path: spec.rules[0].http.paths[0].path
+          value: /
+      - equal:
+          path: spec.rules[0].http.paths[0].backend.servicePort
+          value: 80
+      - matchRegex:
+          path: spec.rules[0].http.paths[0].backend.serviceName
+          pattern: -ingress-e2e$

@@ -1,0 +1,22 @@
+# kube2iam
+## Configuration values for the kube2iam dependency
+## ref: https://github.com/helm/charts/blob/master/stable/kube2iam/README.md
+##
+kube2iam:
+  extraArgs:
+    base-role-arn: arn:aws:iam::925036366969:role/
+  rbac:
+    create: true
+
+# AWS ALB Ingress Controller
+## Configuration values for the aws-alb-ingress-controller dependency
+## ref: https://github.com/helm/charts/blob/master/incubator/aws-alb-ingress-controller/README.md
+##
+aws-alb-ingress-controller:
+  clusterName: alpha
+  awsRegion: "us-west-2"
+  autoDiscoverAwsRegion: false
+  awsVpcID: ""
+  autoDiscoverAwsVpcID: true
+  podAnnotations:
+    iam.amazonaws.com/role: "arn:aws:iam::925036366969:role/KubernetesALBControllerRole"
