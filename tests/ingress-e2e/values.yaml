@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: joatmon08/testapp
+  tag: "2.0"
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -21,7 +21,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-  paths: ["/hello"]
+  paths: ["/*"]
   hosts:
     - ingress-e2e.joatmon08.com
   tls: []

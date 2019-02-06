@@ -9,12 +9,13 @@ dependencies:
 	helm dependency update
 
 test:
-	helm install tests/ingress-e2e --name e2etests
-	pytest tests --release e2etests
-	helm del --purge e2etests
+	helm install tests/ingress-e2e --name tests --namespace e2e
+	pytest tests --release tests --namespace e2e
+	helm del --purge tests
 
 deploy:
-	helm install . --name services
+	AWS_EKS_CLUSTER_NAME=$(shell 'kubectl config current-context | awk -F "@|.us" "{print $2}"')
+	#helm install -f values.$(AWS_EKS_CLUSTER_NAME).yaml . --name services --namespace kube-system
 
 clean:
 	helm del --purge services

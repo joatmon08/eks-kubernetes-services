@@ -19,4 +19,4 @@ configs/*.json
 
 *cache*/
 
-tests/ingress-e2e/values.*.yaml
+values.*.yaml

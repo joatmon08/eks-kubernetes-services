@@ -4,7 +4,7 @@
 ##
 kube2iam:
   extraArgs:
-    base-role-arn: arn:aws:iam::925036366969:role/
+    base-role-arn: arn:aws:iam::[AWS Account Number]:role/
   rbac:
     create: true
 
@@ -13,10 +13,12 @@ kube2iam:
 ## ref: https://github.com/helm/charts/blob/master/incubator/aws-alb-ingress-controller/README.md
 ##
 aws-alb-ingress-controller:
-  clusterName: alpha
-  awsRegion: "us-west-2"
-  autoDiscoverAwsRegion: false
-  awsVpcID: ""
+  clusterName: [AWS Cluster Name]
+  autoDiscoverAwsRegion: true
   autoDiscoverAwsVpcID: true
   podAnnotations:
-    iam.amazonaws.com/role: "arn:aws:iam::925036366969:role/KubernetesALBControllerRole"
+    iam.amazonaws.com/role: "arn:aws:iam::[AWS Account Number]:role/KubernetesALBControllerRole"
+  image:
+    repository: docker.io/amazon/aws-alb-ingress-controller
+    tag: "v1.1.0"
+    pullPolicy: Always
