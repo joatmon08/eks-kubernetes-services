@@ -18,10 +18,12 @@ service:
 
 ingress:
   enabled: true
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-  paths: ["/*"]
+  annotations: {}
+  ## add annotations for nginx or alb
+##  kubernetes.io/ingress.class: nginx or alb
+##  alb.ingress.kubernetes.io/scheme: internet-facing
+##  ingress.kubernetes.io/ssl-redirect: “true”
+  paths: []
   hosts:
     - ingress-e2e.joatmon08.com
   tls: []

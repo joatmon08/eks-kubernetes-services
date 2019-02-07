@@ -10,6 +10,8 @@ def setup(ctx):
 @task
 def install_charts(ctx):
     ctx.run('helm repo add kube2iam http://storage.googleapis.com/kubernetes-charts')
+    ctx.run(
+        'helm repo add nginx-ingress http://storage.googleapis.com/kubernetes-charts')
     ctx.run('helm repo add aws-alb-ingress-controller http://storage.googleapis.com/kubernetes-charts-incubator')
     ctx.run('helm dependency update')
 
@@ -21,9 +23,10 @@ def deploy(ctx, cluster, release, namespace):
 
 
 @task
-def test(ctx, chart, name, namespace):
-    ctx.run('helm install tests/{0} --name {1} --namespace {2}'.format(chart, name, namespace))
-    ctx.run('pytest tests --release {0} --namespace {1}'.format(name, namespace))
+def test(ctx, chart, service, name, namespace):
+    ctx.run('helm install  -f tests/{0}/values.{1}.yaml tests/{0} --name {2} --namespace {3}'.format(
+        chart, service, name, namespace))
+    ctx.run('pytest tests -m {0} --release {1} --namespace {2}'.format(service, name, namespace))
     ctx.run('helm del --purge {0}'.format(name))
 
 

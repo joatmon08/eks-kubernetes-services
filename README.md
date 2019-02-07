@@ -29,7 +29,7 @@ directory, `requirements.yaml`, and `values.[cluster name].yaml`.
 ## Test the Services
 All tests for the services are located under the `tests` directory.
 ```
-invoke helm.test --chart [chart name] --name test --namespace e2e
+invoke helm.test --chart [chart name] --service [ alb | nginx ] --name test --namespace e2e
 ```
 This will deploy a test application via Helm and run a test using pytest.
 

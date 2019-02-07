@@ -14,12 +14,23 @@ def release(request):
 
 
 @pytest.fixture
+def test_application_name(request):
+    return "{0}-ingress-e2e".format(request.config.getoption("--release"))
+
+
+@pytest.fixture
 def namespace(request):
     return request.config.getoption("--namespace")
 
+
 @pytest.fixture
-def kubernetes_client():
+def k8s_extensions():
     kubernetes.config.load_kube_config()
     return kubernetes.client.ExtensionsV1beta1Api()
 
+
+@pytest.fixture
+def k8s_core():
+    kubernetes.config.load_kube_config()
+    return kubernetes.client.CoreV1Api()
 
